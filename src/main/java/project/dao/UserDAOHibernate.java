@@ -1,11 +1,9 @@
 package project.dao;
 
 
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import project.module.User;
-import project.service.DBHelper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -41,10 +39,12 @@ public class UserDAOHibernate implements UserDAO {
             User user = getUser(id);
             em.remove(user);
         }
+
         @Transactional
         public List<User> listUser() {
             return em.createQuery("select user from User user").getResultList();
         }
+
         @Transactional
         public void changeUser(User usersEntity) {
             User newUser = getUser(usersEntity.getId());
@@ -56,6 +56,7 @@ public class UserDAOHibernate implements UserDAO {
             newUser.setRole(usersEntity.getRole());
             em.merge(newUser);
         }
+
         @Transactional
         public void registrUser(User usersEntity) {
             em.persist(usersEntity);

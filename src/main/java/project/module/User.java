@@ -8,18 +8,24 @@ import java.io.Serializable;
 @Entity
 @Table(name = "users", schema = "users_db", catalog = "")
 public class User implements Serializable {
+
     @Id
     @Column(name = "id", nullable = false)
     @GeneratedValue
     private long id;
+
     @Column(name = "name")
     private String name;
+
     @Column(name = "age")
     private int age;
+
     @Column(name = "login")
     private String login;
+
     @Column(name = "password")
     private String password;
+
     @Column(name = "role")
     private String role;
 
