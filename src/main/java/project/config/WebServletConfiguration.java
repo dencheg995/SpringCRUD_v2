@@ -1,4 +1,4 @@
-package project.spring;
+package project.config;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

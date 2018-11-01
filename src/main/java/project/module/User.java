@@ -29,11 +29,23 @@ public class User implements Serializable {
     @Column(name = "role")
     private String role;
 
+    @OneToOne
+    @JoinColumn(name = "ROLE_ID", nullable = false, unique = true)
+    private Role roleOBJ;
+
     public User(String role) {
         this.role = role;
     }
 
     public User() {
+    }
+
+    public Role getRoleOBJ() {
+        return roleOBJ;
+    }
+
+    public void setRoleOBJ(Role roleOBJ) {
+        this.roleOBJ = roleOBJ;
     }
 
     public long getId() {

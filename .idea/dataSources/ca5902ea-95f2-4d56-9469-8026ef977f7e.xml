@@ -1108,45 +1108,67 @@
       <DefaultForCharset>0</DefaultForCharset>
     </collation>
     <table id="278" parent="7" name="hibernate_sequence"/>
-    <table id="279" parent="7" name="users"/>
-    <column id="280" parent="278" name="next_val">
+    <table id="279" parent="7" name="roles"/>
+    <table id="280" parent="7" name="users"/>
+    <column id="281" parent="278" name="next_val">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="281" parent="279" name="id">
+    <column id="282" parent="279" name="id_role">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="282" parent="279" name="name">
+    <column id="283" parent="279" name="role_name">
       <Position>2</Position>
       <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="283" parent="279" name="age">
-      <Position>3</Position>
+    <key id="284" parent="279" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id_role</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="285" parent="279" name="user_to_role">
+      <ColNames>id_role</ColNames>
+      <RefSchemaName>user_db</RefSchemaName>
+      <RefTableName>users</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="286" parent="280" name="id">
+      <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="284" parent="279" name="login">
+    <column id="287" parent="280" name="name">
+      <Position>2</Position>
+      <DataType>varchar(45)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="288" parent="280" name="age">
+      <Position>3</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="289" parent="280" name="login">
       <Position>4</Position>
       <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="285" parent="279" name="password">
+    <column id="290" parent="280" name="password">
       <Position>5</Position>
       <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="286" parent="279" name="role">
+    <column id="291" parent="280" name="role">
       <Position>6</Position>
       <DataType>varchar(45)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="287" parent="279" name="PRIMARY">
+    <key id="292" parent="280" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
