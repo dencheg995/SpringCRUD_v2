@@ -12,7 +12,7 @@
     <title>Title</title>
 </head>
 <body>
-<form:form modelAttribute = "registAttribute" method="post" >
+<form:form modelAttribute = "registAttribute" >
     <table>
         <tr>
             <td><form:label path="name">Name:</form:label></td>

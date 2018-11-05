@@ -30,7 +30,6 @@
                         <td><input type="hidden" name="ageChange" value="${user.age}"></td>
                         <td><input type="hidden" name="loginChange" value="${user.login}"></td>
                         <td><input type="hidden" name="passwordChange" value="${user.password}"></td>
-                        <td><input type="hidden" name="roleChange" value="${user.role}"></td>
                         <td><input type="submit" value="Изменить пользователя"></td>
                     </form>
                 </td>
@@ -43,9 +42,19 @@
         </c:forEach>
         </tbody>
     </table>
-    <form action="/addUser">
+    <form action="/addUser" >
         <input type="submit" value="Добавить пользователя">
+
+    </form>
+    <form action="/logout" method="post">
+        <input type="submit" value="Выйти">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+    </form>
+
+    <form action="/" method="post">
+        <input type="submit" value="Назад">
     </form>
 </div>
+
 </body>
 </html>

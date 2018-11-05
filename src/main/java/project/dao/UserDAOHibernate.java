@@ -1,6 +1,7 @@
 package project.dao;
 
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import project.module.User;
@@ -31,6 +32,8 @@ public class UserDAOHibernate implements UserDAO {
         }
         @Transactional
         public long addUser(User usersEntity) {
+            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+            usersEntity.setPassword(bCryptPasswordEncoder.encode(usersEntity.getPassword()));
             em.persist(usersEntity);
             return usersEntity.getId();
         }
@@ -53,12 +56,14 @@ public class UserDAOHibernate implements UserDAO {
             newUser.setAge(usersEntity.getAge());
             newUser.setLogin(usersEntity.getLogin());
             newUser.setPassword(usersEntity.getPassword());
-            newUser.setRole(usersEntity.getRole());
             em.merge(newUser);
         }
 
         @Transactional
         public void registrUser(User usersEntity) {
+            BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+            usersEntity.setPassword(bCryptPasswordEncoder.encode(usersEntity.getPassword()));
+            usersEntity.setEnabled(true);
             em.persist(usersEntity);
         }
 
@@ -66,6 +71,4 @@ public class UserDAOHibernate implements UserDAO {
         public User getUserWithLogin(String login) {
             return (User) em.createQuery("select user from User user where user.login = :login").setParameter("login", login).getSingleResult();
         }
-
-
 }

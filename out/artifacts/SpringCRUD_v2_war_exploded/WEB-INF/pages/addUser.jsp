@@ -12,30 +12,47 @@
     <title>Title</title>
 </head>
 <body>
-    <form:form modelAttribute = "userAttribute" method="post" >
-        <table>
-            <tr>
-                <td><form:label path="name">Name:</form:label></td>
-                <td><form:input path="name" /></td>
-            </tr>
-            <tr>
-                <td><form:label path="age">Age:</form:label></td>
-                <td><form:input path="age" /></td>
-            </tr>
-            <tr>
-                <td><form:label path="login">Login:</form:label> </td>
-                <td><form:input path="login" /></td>
-            </tr>
-            <tr>
-                <td><form:label path="password">Password:</form:label> </td>
-                <td><form:input path="password"/></td>
-            </tr>
-            <tr>
-                <td><form:label path="role">Role:</form:label></td>
-                <td><form:input path="role"/></td>
-            </tr>
-        </table>
-        <input type="submit" value="Добавить">
-    </form:form>
+<form:form modelAttribute="userAttribute">
+    <table >
+        <tr>
+            <td>Name : </td>
+            <td><form:input path="name"  /></td>
+        </tr>
+        <tr>
+            <td>Age :</td>
+            <td><form:input path="age" /></td>
+        </tr>
+        <tr>
+            <td>Login :</td>
+            <td><form:input path="login" /></td>
+        </tr>
+        <tr>
+            <td>Password :</td>
+            <td><form:password path="password" /></td>
+        </tr>
+        <tr>
+            <td>Enabled :</td>
+            <td><form:input value="true" path="enabled" />
+
+            </td>
+        </tr>
+        <tr>
+            <form:form modelAttribute="roleAttribute">
+                <table>
+                    <tr>
+                        <td>Role :</td>
+                        <td><form:input path="nameRole" /></td>
+                    </tr>
+
+                    <tr>
+                        <td><input type="submit" value="Save" /></td>
+                    </tr>
+                </table>
+            </form:form>
+        </tr>
+    </table>
+</form:form>
+
 </body>
 </html>
+

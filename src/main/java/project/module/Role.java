@@ -13,10 +13,24 @@ public class Role {
     private long id;
 
     @Column(name = "role_name")
-    private String name;
+    private String nameRole;
 
-    @OneToOne(mappedBy = "roleOBJ")
+    @Column(name = "user_id",updatable=false, insertable = false)
+    private int userId;
+
+    @ManyToOne
     private User user;
+
+    public Role() {
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
 
     public User getUser() {
         return user;
@@ -26,7 +40,6 @@ public class Role {
         this.user = user;
     }
 
-
     public long getId() {
         return id;
     }
@@ -35,11 +48,11 @@ public class Role {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNameRole() {
+        return nameRole;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNameRole(String nameRole) {
+        this.nameRole = nameRole;
     }
 }
