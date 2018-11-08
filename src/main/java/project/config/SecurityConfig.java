@@ -19,8 +19,8 @@ import project.service.MyDetailService;
 @ComponentScan(basePackages = "project")
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-
     @Autowired
+    @Qualifier("userDetailService")
     UserDetailsService userDetailsService;
 
     @Autowired
@@ -36,7 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests().antMatchers("/regist").permitAll()
+        http.authorizeRequests().antMatchers("/register").permitAll()
                 .antMatchers("/list").hasAnyAuthority("ADMIN").anyRequest().authenticated()
                 .and()
         .formLogin().loginPage("/mylogin").permitAll().usernameParameter("username").passwordParameter("password").and().csrf().disable();

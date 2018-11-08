@@ -38,6 +38,16 @@ public class User implements Serializable {
     public User() {
     }
 
+    public User(String name, int age, String login, String password, boolean enabled, Set<Role> userRoles) {
+        this.name = name;
+        this.age = age;
+        this.login = login;
+        this.password = password;
+        this.enabled = enabled;
+        this.userRoles = userRoles;
+    }
+
+
     public boolean isEnabled() {
         return enabled;
     }
