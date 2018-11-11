@@ -57,7 +57,7 @@ public class UserDAOHibernate implements UserDAO {
             newUser.setName(usersEntity.getName());
             newUser.setAge(usersEntity.getAge());
             newUser.setLogin(usersEntity.getLogin());
-            newUser.setPassword(bCryptPasswordEncoder.encode(usersEntity.getPassword()));
+            newUser.setPassword(usersEntity.getPassword());
             em.merge(newUser);
         }
 
