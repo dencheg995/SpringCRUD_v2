@@ -1,5 +1,8 @@
 package project.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import project.module.Role;
@@ -7,51 +10,16 @@ import project.module.User;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @Transactional
-public class RoleDAO {
-    @PersistenceContext
-    private EntityManager em;
+public interface RoleDAO extends JpaRepository<Role, Long> {
 
-    public RoleDAO() {
-    }
+    @Query("select role.nameRole from Role role")
+    List<String> getRoles(String login);
 
-    public EntityManager getEm() {
-        return em;
-    }
+    @Query("select role from Role role where role.userId = :userId")
+    Role getOne(@Param("userId") long id);
 
-    public void setEm(EntityManager em) {
-        this.em = em;
-    }
-
-    @Transactional
-    public void addRole(User user, Role role) {
-        role.setUser(user);
-        em.persist(role);
-    }
-
-    @Transactional
-    public List<String> getRoles(String login) {
-        return em.createQuery("select role.nameRole from Role role").getResultList();
-    }
-
-    @Transactional
-    public Role findRole(int id) {
-        return (Role) em.createQuery("select role from Role role where role.userId =:userId").setParameter("userId", id).getSingleResult();
-    }
-
-    @Transactional
-    public void removeRole(int id) {
-        Role role = findRole(id);
-        em.remove(role);
-    }
-
-    @Transactional
-    public void registRole(User user, String  userRole) {
-        Role role = new Role();
-        role.setNameRole(userRole);
-        role.setUser(user);
-        em.persist(role);
-    }
 }

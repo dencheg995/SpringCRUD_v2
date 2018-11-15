@@ -8,8 +8,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import project.dao.UserDAO;
-import project.dao.UserDAOHibernate;
 import project.module.Role;
 import project.module.User;
 
@@ -22,11 +20,11 @@ import java.util.Set;
 public class MyDetailService implements UserDetailsService {
 
     @Autowired
-    private UserDAOHibernate daoHibernate;
+    private UserService userServiceDB;
 
     @Transactional
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
-        User user = daoHibernate.getUserWithLogin(s);
+        User user = userServiceDB.getUserLogin(s);
         List<GrantedAuthority> authorities = buildUserAuthority(user.getUserRoles());
         return buildUserForAuthentication(user, authorities);
     }

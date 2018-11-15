@@ -18,17 +18,11 @@ public class RoleService {
     public RoleService() {
     }
 
-    public RoleDAO getDao() {
-        return daoRole;
-    }
-
-    public void setDao(RoleDAO dao) {
-        this.daoRole = dao;
-    }
 
     @Transactional
     public void addRole(User user, Role role) {
-        daoRole.addRole(user,role);
+        role.setUser(user);
+        daoRole.save(role);
     }
 
     @Transactional
@@ -38,16 +32,21 @@ public class RoleService {
 
     @Transactional
     public Role findRole(int id) {
-        return daoRole.findRole(id);
+        return daoRole.getOne((long) id);
     }
 
     @Transactional
-    public void removeRole(int id) {
-        daoRole.removeRole(id);
+    public void removeRole(long id) {
+        Role role = daoRole.getOne(id);
+        daoRole.delete(role);
     }
 
     @Transactional
     public void registRole(User user, String  userRole) {
-        daoRole.registRole(user, userRole);
+        Role role = new Role();
+        role.setNameRole(userRole);
+        role.setUser(user);
+        role.setUser(user);
+        daoRole.save(role);
     }
 }

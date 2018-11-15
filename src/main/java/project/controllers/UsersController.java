@@ -32,14 +32,14 @@ public class UsersController {
 
     @RequestMapping(value = "/removeUser/{id}" , method = RequestMethod.GET)
     public String getDelete(@PathVariable long id, Model model) {
-        roleService.removeRole((int) id);
+        roleService.removeRole(id);
         userService.removeUser(id);
         model.addAttribute("id", id);
-        return "redirect:/list";
+        return "redirect:/";
     }
 
     @RequestMapping(value = {"/"})
-    public String listUsers(Model model) throws IOException {
+    public String listUsers(Model model) {
             model.addAttribute("userAttribute", new User());
             model.addAttribute("roleAttribute", new Role());
             return "list";

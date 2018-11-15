@@ -1,8 +1,6 @@
 package project.module;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
 import project.config.SpringBootCRUD;
 
 import javax.persistence.*;

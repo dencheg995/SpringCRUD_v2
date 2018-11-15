@@ -19,7 +19,7 @@ public class Role implements Serializable {
     private String nameRole;
 
     @Column(name = "user_id",updatable=false, insertable = false)
-    private int userId;
+    private long userId;
 
     @ManyToOne
     @JsonBackReference
@@ -28,7 +28,7 @@ public class Role implements Serializable {
     public Role() {
     }
 
-    public int getUserId() {
+    public long getUserId() {
         return userId;
     }
 
