@@ -123,7 +123,6 @@
                         <div class="container-fluid">
                             <div class="row">
                                 <div class="col-9">
-
                                         <table class="table table-striped">
                                          <thead>
                                              <tr>
@@ -137,23 +136,6 @@
                                              </tr>
                                         </thead>
                                             <tbody id="showBody">
-                                                <th:block th:each = "user :${list}">
-                                                    <tr id = "tr1">
-                                                        <td th:text ="${user.id}"/>
-
-                                                        <td th:text ="${user.name}"/>
-
-                                                        <td th:text ="${user.age}"/>
-
-                                                        <td th:text ="${user.login}"/>
-
-                                                        <td th:text ="${user.password}"/>
-
-                                                        <td><button id='delete' class='btn btn-danger' >delete</button></td>
-
-                                                        <td><button id='edit' class='btn btn-warning' data-toggle="modal" data-target="#EditModal">Edit</button></td>
-                                                    </tr>
-                                                </th:block>
                                             </tbody>
                                         </table>
                                     </div>
@@ -216,6 +198,8 @@
 <script>
     $(document).ready(function() {
 
+        assignDataToTable();
+
         $('table').on('click', 'button[id="edit"]', function(e) {
             var id = $(this).closest('tr').children('td:first').text();
             var name = $(this).closest('tr').children('td:nth-child(2)').text();
@@ -241,27 +225,48 @@
                             passwordChange: $("#passwordChange").val(),
                         },
 
-                        success: function(html){
+                        success: function(){
                             location.reload();
                         }
                     });
             });
         });
-
-
-
        $('table').on('click', 'button[id="delete"]', function (e){
            var id = $(this).closest('tr').children('td:first').text();
            $.ajax ({
                type: "GET",
                url: "/removeUser/" + id,
-               success: function(html){
-                   $("#container").html(html);
+               success: function(){
+                   assignDataToTable()
                }
            })
        });
     });
 
+    function assignDataToTable() {
+        $("tbody").empty();
+        $.ajax({
+            type: "GET",
+            contentType: "application/json",
+            url: "/list",
+            typeDate: "json",
+            success: function(data) {
+                var users = JSON.parse(JSON.stringify(data));
+                for (var i in users)  {
+                    $("tbody").
+                    append("<tr> \
+                            <td>" +  users[i].id + "</td> \
+                            <td>" +  users[i].name + "</td> \
+                            <td>" +  users[i].age + "</td> \
+                            <td>" +  users[i].login + "</td> \
+                            <td>" +  users[i].password + "</td> \
+                            <td> \ <button id='delete' class='btn btn-danger'>delete</button> \</td> \
+                          <td> \ <button id='edit' class='btn btn-warning' data-toggle='modal' data-target='#EditModal' >Edit</button> \ </td> \
+                        </tr>");
+                }
+            },
+        });
+    }
 </script>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>

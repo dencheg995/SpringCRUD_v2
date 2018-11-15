@@ -1,13 +1,13 @@
 package project.dao;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 import project.module.User;
 
 import java.util.List;
 
-@Repository("userRepository")
-public interface UserDAO {
+public interface UserDAO  {
     public User getUser(long id);
     public long addUser(User usersEntity);
     public void removeUser(long id);

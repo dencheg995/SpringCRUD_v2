@@ -2,11 +2,14 @@ package project.module;
 
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "roles", schema = "users_db")
-public class Role {
+public class Role implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id_role")
@@ -19,6 +22,7 @@ public class Role {
     private int userId;
 
     @ManyToOne
+    @JsonBackReference
     private User user;
 
     public Role() {

@@ -1,6 +1,9 @@
 package project.module;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.orm.jpa.LocalEntityManagerFactoryBean;
+import project.config.SpringBootCRUD;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -9,6 +12,7 @@ import java.util.Set;
 
 @Entity
 @Table(name = "users", schema = "users_db", catalog = "")
+@EntityListeners(SpringBootCRUD.class)
 public class User implements Serializable {
 
     @Id
@@ -32,6 +36,7 @@ public class User implements Serializable {
     private boolean enabled;
 
     @OneToMany(mappedBy = "user")
+    @JsonManagedReference
     private Set<Role> userRoles = new HashSet<Role>();
 
 

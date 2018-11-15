@@ -10,9 +10,10 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
-@Repository
+
 @Transactional
-public class UserDAOHibernate implements UserDAO {
+@Repository
+public class UserDAOHibernate implements UserDAO  {
         @PersistenceContext
         private EntityManager em;
 

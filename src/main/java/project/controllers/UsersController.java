@@ -25,11 +25,6 @@ public class UsersController {
         this.userService = userService;
     }
 
-//    @RequestMapping("/")
-//    public String index () {
-//        return "/list";
-//    }
-
     @RequestMapping(value = "/mylogin")
     public String login() {
         return "login";
@@ -43,14 +38,13 @@ public class UsersController {
         return "redirect:/list";
     }
 
-    @RequestMapping(value = {"/","/list"} , method = RequestMethod.GET)
+    @RequestMapping(value = {"/"})
     public String listUsers(Model model) throws IOException {
-            List<User> list = userService.listUser();
-            model.addAttribute("list", list);
             model.addAttribute("userAttribute", new User());
             model.addAttribute("roleAttribute", new Role());
             return "list";
     }
+
 
     @RequestMapping(value = "/addUser", method = RequestMethod.GET)
     public String getAdd(Model model) {
@@ -63,7 +57,7 @@ public class UsersController {
     public String addUsers(@ModelAttribute("userAttribute") User user, @ModelAttribute("roleAttribute") Role role) {
         userService.addUser(user);
         roleService.addRole(user, role);
-        return "redirect:/list";
+        return "redirect:/";
     }
 
     @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
@@ -71,22 +65,6 @@ public class UsersController {
         model.addAttribute("changeUser", userService.getUser(id));
         return "list";
     }
-////
-//    @RequestMapping(value = "/changeUser", method = RequestMethod.GET)
-//    public String getEdit(@RequestParam(value = "idChange") long id,
-//                          @RequestParam(value = "nameChange") String name,
-//                          @RequestParam(value = "ageChange") int age,
-//                          @RequestParam(value = "loginChange") String login,
-//                          @RequestParam(value = "passwordChange") String password,
-//                          Model model) {
-//
-//        model.addAttribute("idChange", id);
-//        model.addAttribute("nameChange", name);
-//        model.addAttribute("ageChange", age);
-//        model.addAttribute("loginChange", login);
-//        model.addAttribute("passwordChange", password);
-//        return "/list";
-//    }
 
     @RequestMapping(value = "/changeUser")
     public String changeUser(@RequestParam(value = "idChange") long id,
