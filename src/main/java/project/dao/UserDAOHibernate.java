@@ -45,6 +45,7 @@ public class UserDAOHibernate implements UserDAO {
 
         @Transactional
          public List<User> listUser() {
+
             return em.createQuery("select user from User user").getResultList();
           }
 

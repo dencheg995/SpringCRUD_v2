@@ -35,8 +35,8 @@ public class UsersController {
         return "login";
     }
 
-    @RequestMapping(value = "/removeUser" , method = RequestMethod.GET)
-    public String getDelete(@RequestParam(value = "id") long id, Model model) {
+    @RequestMapping(value = "/removeUser/{id}" , method = RequestMethod.GET)
+    public String getDelete(@PathVariable long id, Model model) {
         roleService.removeRole((int) id);
         userService.removeUser(id);
         model.addAttribute("id", id);
@@ -44,8 +44,7 @@ public class UsersController {
     }
 
     @RequestMapping(value = {"/","/list"} , method = RequestMethod.GET)
-    public String listUsers(
-            Model model) throws IOException {
+    public String listUsers(Model model) throws IOException {
             List<User> list = userService.listUser();
             model.addAttribute("list", list);
             model.addAttribute("userAttribute", new User());
@@ -65,6 +64,12 @@ public class UsersController {
         userService.addUser(user);
         roleService.addRole(user, role);
         return "redirect:/list";
+    }
+
+    @RequestMapping(value = "/edit/{id}", method = RequestMethod.GET)
+    public String editUser(@PathVariable("id") Long id, Model model ) {
+        model.addAttribute("changeUser", userService.getUser(id));
+        return "list";
     }
 ////
 //    @RequestMapping(value = "/changeUser", method = RequestMethod.GET)
@@ -89,8 +94,8 @@ public class UsersController {
                              @RequestParam(value = "ageChange") int age,
                              @RequestParam(value = "loginChange") String login,
                              @RequestParam(value = "passwordChange") String password,
-                             @ModelAttribute("changeUser") User profile, Model model) {
-        model.addAttribute("userChange", userService.getUser(id));
+                             @ModelAttribute("changeUser") User profile) {
+
         profile.setId(id);
         profile.setName(name);
         profile.setAge(age);
@@ -113,6 +118,7 @@ public class UsersController {
         roleService.registRole(user, "USER");
         return "redirect:/mylogin";
     }
+
 
     @GetMapping(value = "/registred")
     public String forUsers() {

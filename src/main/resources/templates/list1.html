@@ -1,3 +1,4 @@
+
 <html xmlns:th="">
 <head>
     <title>Title</title>
@@ -12,7 +13,7 @@
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/Dynatable/0.3.1/jquery.dynatable.css">
 </head>
 <body>
-<div id = "container">
+
 <div class="container-fluid">
     <div class="row" style="background: #000000; height: 30px">
         <div class="col-md-11">
@@ -27,7 +28,6 @@
     </div>
 </div>
 
-    <div class="container-fluid">
 <div class="row">
     <div class="col-1">
         <div class="list-group" id="list-tab" role="tablist">
@@ -118,59 +118,107 @@
                         </ul>
                     </div>
 
-
                     <div class="card-body">
-                        <div class="container-fluid">
-                            <div class="row">
-                                <div class="col-9">
+                        <div class = "table-responsive">
+                            <table class = "table table-striped table-hover table-bordered">
+                                <thead>
+                                <tr>
+                                    <td col-3>ID</td>
+                                    <td col-3>Name</td>
+                                    <td col-3>Age</td>
+                                    <td col-2>Edit</td>
+                                    <td col-1>Remove</td>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <th:block th:each = "user :${list}">
+                                    <tr>
+                                        <td id = "idUser" th:text ="${user.id}"/>
 
-                                        <table class="table table-striped">
-                                         <thead>
-                                             <tr>
-                                                <th scope="col">Id</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Age</th>
-                                                <th scope="col">Login</th>
-                                                <th scope="col">Password</th>
-                                                <th scope="col">delete</th>
-                                                <th scope="col">Edit</th>
-                                             </tr>
-                                        </thead>
-                                            <tbody id="showBody">
-                                                <th:block th:each = "user :${list}">
-                                                    <tr id = "tr1">
-                                                        <td th:text ="${user.id}"/>
+                                        <td id = "nameUser" th:text ="${user.name}" value ="${user.name}"/>
 
-                                                        <td th:text ="${user.name}"/>
+                                        <td id = "ageUser" th:text ="${user.age}" value="${user.age}"/>
 
-                                                        <td th:text ="${user.age}"/>
+                                        <td>
+                                            <form id="form" action="/list">
+                                                <input type="hidden"  id="idChange1" th:value="${user.id}">
+                                                <input type="hidden"  id="nameChange1" th:value="${user.name}">
+                                                <input type="hidden"  id="ageChange1" th:value="${user.age}">
+                                                <input type="hidden"  id="loginChange1" th:value="${user.login}">
+                                                <input type="hidden"  id="passwordChange1" th:value="${user.password}">
+                                            </form>
+                                                <button id="load" type ="button" class="btn btn-info btn-sm" data-toggle="modal" data-target="#EditModal">Edit</button>
 
-                                                        <td th:text ="${user.login}"/>
+                                        </td>
 
-                                                        <td th:text ="${user.password}"/>
+                                        <!--<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">-->
+                                            <!--<div class="modal-dialog" role="document">-->
+                                                <!--<div class="modal-content">-->
+                                                    <!--<div class="modal-header">-->
+                                                        <!--<h4 class="modal-title" id="editModalLabel">Edit User</h4>-->
+                                                        <!--<button type="button" class="close" data-dismiss="modal" aria-label="Close">-->
+                                                            <!--x-->
+                                                        <!--</button>-->
+                                                    <!--</div>-->
+                                                    <!--<div class="modal-body">-->
+                                                        <!--<form  th:object="${userChange}" role="form" th:action="@{/changeUser}"  method="post">-->
+                                                            <!--<div class="form-group">-->
+                                                                <!--<label for="idChange">id:</label>-->
+                                                                <!--<input id="idChange" class="form-control" type="text" name="idChange">-->
+                                                            <!--</div>-->
+                                                            <!--<div class="form-group">-->
+                                                                <!--<label for="nameChange">имя:</label>-->
+                                                                <!--<input id="nameChange" class="form-control" type="text">-->
+                                                            <!--</div>-->
 
-                                                        <td><button id='delete' class='btn btn-danger' >delete</button></td>
+                                                            <!--<div class="form-group">-->
+                                                                <!--<label for="ageChange">возраст:</label>-->
+                                                                <!--<input id ="ageChange" class="form-control" type="text">-->
+                                                            <!--</div>-->
 
-                                                        <td><button id='edit' class='btn btn-warning' data-toggle="modal" data-target="#EditModal">Edit</button></td>
-                                                    </tr>
-                                                </th:block>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                            </div>
+                                                            <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                                                                <!--&lt;!&ndash;<label for="loginChange">логин:</label>&ndash;&gt;-->
+                                                                <!--&lt;!&ndash;<input id = "loginChange" class="form-control" type="text">&ndash;&gt;-->
+                                                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+                                                            <!--&lt;!&ndash;<div class="form-group">&ndash;&gt;-->
+                                                                <!--&lt;!&ndash;<label for="passwordChange">пароль:</label>&ndash;&gt;-->
+                                                                <!--&lt;!&ndash;<input id = "passwordChange" class="form-control" type="password" >&ndash;&gt;-->
+                                                            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                                                        <!--</form>-->
+                                                            <!--<div class="modal-footer">-->
+
+                                                            <!--</div>-->
+                                                    <!--</div>-->
+                                                <!--</div>-->
+                                            <!--</div>-->
+                                        <!--</div>-->
+                                        <td>
+                                            <form th:action="@{/removeUser}">
+                                                <input type="hidden" name="id" th:value="${user.id}">
+                                                <input type="submit" value="Удалить пользователя" class="btn btn-info">
+                                            </form>
+                                        </td>
+                                    </tr>
+                                </th:block>
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
-
             <div class="tab-pane fade" id="list-profile" role="tabpanel" aria-labelledby="list-profile-list">
                 ...
+                <div id="includedContent"></div>
+                <!--<script>-->
+                    <!--var link = document.querySelector('link[rel=import]');-->
+                    <!--var content = link.import.querySelector('#intro-dm');-->
+                    <!--document.body.appendChild(content.cloneNode(true));-->
+                <!--</script>-->
             </div>
-
         </div>
     </div>
 </div>
-    </div>
 <div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -181,90 +229,70 @@
                 </button>
             </div>
             <div class="modal-body">
-                    <div class="form-group form-vales">
+                <form  th:object="${userChange}" role="form" th:action="@{/changeUser}"  method="post">
+                    <div class="form-group">
                         <label for="idChange">id:</label>
-                        <input id="idChange" class="form-control" type="text" name="idChange" disabled>
+                        <input id="idChange" class="form-control" type="text" name="idChange">
                     </div>
-
-                    <div class="form-group form-vales">
+                    <div class="form-group">
                         <label for="nameChange">имя:</label>
                         <input id="nameChange" class="form-control" type="text">
                     </div>
 
-                    <div class="form-group form-vales">
+                    <div class="form-group">
                         <label for="ageChange">возраст:</label>
                         <input id ="ageChange" class="form-control" type="text">
                     </div>
 
-                    <div class="form-group form-vales">
-                        <label for="loginChange">логин:</label>
-                        <input id = "loginChange" class="form-control" type="text">
-                    </div>
+                    <!--<div class="form-group">-->
+                    <!--<label for="loginChange">логин:</label>-->
+                    <!--<input id = "loginChange" class="form-control" type="text">-->
+                    <!--</div>-->
 
-                    <div class="form-group form-vales">
-                        <label for="passwordChange">пароль:</label>
-                        <input id = "passwordChange" class="form-control" type="password" >
-                    </div>
+                    <!--<div class="form-group">-->
+                    <!--<label for="passwordChange">пароль:</label>-->
+                    <!--<input id = "passwordChange" class="form-control" type="password" >-->
+                    <!--</div>-->
+                </form>
                 <div class="modal-footer">
-                    <button id='save' class='btn btn-danger'> Save </button>
+
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
 <script>
-    $(document).ready(function() {
+    $('#EditModal').on('click', function(){
 
-        $('table').on('click', 'button[id="edit"]', function(e) {
-            var id = $(this).closest('tr').children('td:first').text();
-            var name = $(this).closest('tr').children('td:nth-child(2)').text();
-            var age = $(this).closest('tr').children('td:nth-child(3)').text();
-            var login = $(this).closest('tr').children('td:nth-child(4)').text();
-            var password = $(this).closest('tr').children('td:nth-child(5)').text();
+       var id = $('#idUser').val();
+         var  name = $('#nameUser').val();
+          var  age = $('#ageUser').val();
 
-            $("#idChange").val(id);
-            $("#nameChange").val(name);
-            $("#ageChange").val(age);
-            $("#loginChange").val(login);
-            $("#passwordChange").val(password);
-
-            $('#save').click(function () {
-                    $.ajax ({
-                        type : "POST",
-                        url: "/changeUser",
-                        data: {
-                            idChange : $("#idChange").val(),
-                            nameChange : $("#nameChange").val(),
-                            ageChange: $("#ageChange").val(),
-                            loginChange: $("#loginChange").val(),
-                            passwordChange: $("#passwordChange").val(),
-                        },
-
-                        success: function(html){
-                            location.reload();
-                        }
-                    });
-            });
-        });
-
-
-
-       $('table').on('click', 'button[id="delete"]', function (e){
-           var id = $(this).closest('tr').children('td:first').text();
-           $.ajax ({
-               type: "GET",
-               url: "/removeUser/" + id,
-               success: function(html){
-                   $("#container").html(html);
-               }
-           })
-       });
+        $('#idChange').val(id);
+        $('#nameChange').val(name);
+        $('#ageChange').val(age);
+        $('#EditModal').modal('show');
+        // $.ajax({
+        //     method: 'get',
+        //     url: '/list',
+        //     data: {
+        //         id : $('#idChange1').val(),
+        //         name : $('#nameChange1').val(),
+        //         age : $('#ageChange1').val()
+        //     },
+        //     dataType: 'html',
+        //     success: function(data){
+        //         $('#idChange').val(data.id);
+        //         $('#nameChange').val(data.nameChange);
+        //         $('#ageChange').val(data.ageChange);
+        //
+        //     },
+        // });
     });
-
 </script>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
 </body>
 </html>
