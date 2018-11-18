@@ -9,8 +9,7 @@ import project.module.Role;
 import project.module.User;
 import project.service.RoleService;
 import project.service.UserService;
-import java.io.IOException;
-import java.util.List;
+
 
 @Controller
 public class UsersController {
@@ -38,7 +37,7 @@ public class UsersController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = {"/"})
+    @RequestMapping(value = {"/", "list"})
     public String listUsers(Model model) {
             model.addAttribute("userAttribute", new User());
             model.addAttribute("roleAttribute", new Role());

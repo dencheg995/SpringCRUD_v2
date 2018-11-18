@@ -85,6 +85,12 @@
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:1.0.2.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:2.0.6.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework.data:spring-data-jpa:2.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.atteo:evo-inflector:1.2.2" />
+          <element id="library" level="project" name="Maven: org.springframework.data:spring-data-rest-core:3.0.6.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.data:spring-data-rest-webmvc:2.6.4.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.hateoas:spring-hateoas:0.24.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.plugin:spring-plugin-core:1.2.0.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework.data:spring-data-commons:2.1.0.RELEASE" />
         </element>
       </element>
       <element id="javaee-facet-resources" facet="SpringCRUD_v2/web/Web" />

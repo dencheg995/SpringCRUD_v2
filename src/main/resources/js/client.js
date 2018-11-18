@@ -1,6 +1,5 @@
 $(document).ready(function() {
 
-
     assignDataToTable();
 
     $('table').on('click', 'button[id="edit"]', function(e) {
@@ -49,7 +48,7 @@ $(document).ready(function() {
         $.ajax({
             type: "GET",
             contentType: "application/json",
-            url: "/list",
+            url: "http://localhost:8080/list",
             typeDate: "json",
             success: function(data) {
 
