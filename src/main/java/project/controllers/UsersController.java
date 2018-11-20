@@ -29,6 +29,11 @@ public class UsersController {
         return "login";
     }
 
+//    @RequestMapping(value = "/")
+//    public String index() {
+//        return "index";
+//    }
+
     @RequestMapping(value = "/removeUser/{id}" , method = RequestMethod.GET)
     public String getDelete(@PathVariable long id, Model model) {
         roleService.removeRole(id);
@@ -37,7 +42,7 @@ public class UsersController {
         return "redirect:/";
     }
 
-    @RequestMapping(value = {"/", "list"})
+    @RequestMapping(value = {"/"})
     public String listUsers(Model model) {
             model.addAttribute("userAttribute", new User());
             model.addAttribute("roleAttribute", new Role());
